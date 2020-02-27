@@ -1,0 +1,75 @@
+﻿@model IList<Recipe>
+@{
+    ViewData["Title"] = "All Recipes";
+}
+
+<h1>All Recipes</h1>
+
+
+<div id="recipes">
+
+    <div id="titles">
+        <ul>
+            <li>Name</li>
+            <li>Type</li>
+            <li>Cook Time</li>
+            <li>Ingredients</li>
+            <li>Rating</li>
+        </ul>
+    </div>
+    @foreach (var recipe in Model)
+    {
+<div class="recipe">
+    <a asp-controller="Recipes" asp-action="Detail" asp-route-id="@recipe.Id">
+        <img src="~/images/@recipe.ImageName" alt="No image" />
+    </a>
+
+    <a asp-controller="Recipes" asp-action="Table" asp-route-id="@recipe.Id">
+        @recipe.Name
+    </a>
+
+    <p>@recipe.RecipeType</p>
+    <p>@recipe.CookTimeInMinutes min</p>
+    <p>@recipe.Ingredients.Count() ingredients</p>
+
+
+    @{
+        switch (Math.Floor(recipe.AverageRating))
+        {
+            case 1:
+                <img src="~/images/1-star.png" />
+                break;
+
+            case 2:
+                <img src="~/images/2-star.png" />
+                break;
+
+            case 3:
+                <img src="~/images/3-star.png" />
+                break;
+
+            case 4:
+                <img src="~/images/4-star.png" />
+                break;
+
+            case 5:
+                <img src="~/images/5-star.png" />
+                break;
+
+            default:
+                break;
+
+
+        }
+    }
+
+
+
+</div>
+
+    }
+
+
+
+
+</div>
